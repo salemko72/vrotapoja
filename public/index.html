@@ -61,7 +61,7 @@
 <header class="site-header">
   <a class="brand" href="#top" aria-label="Vrota Poja">
     <img class="brand-mark" src="images/vp-mark.webp" alt="VP">
-    <span class="brand-name" data-i18n="brand.name">VROTA POJA</span><span class="brand-sub">STARI GRAD, HVAR</span>
+    <span class="brand-text"><span class="brand-name" data-i18n="brand.name">VROTA POJA</span><span class="brand-sub">STARI GRAD, HVAR</span></span>
   </a>
   <nav aria-label="Glavna navigacija">
     <a href="#projekt" data-i18n="nav.project">O PROJEKTU</a>
@@ -83,7 +83,7 @@
   <div class="hero-copy">
     <p class="eyebrow" data-i18n="hero.eyebrow">VROTA POJA / STARI GRAD</p>
     <h1 data-i18n="hero.title">Stanovi</h1>
-    <p class="slogan" data-i18n="hero.slogan">Moderno stanovanje<br>u srcu povijesti.</p>
+    <p class="slogan" data-i18n="hero.slogan">Moderno stanovanje –<br>u srcu povijesti.</p>
     <div class="rule"></div>
     <p class="intro" data-i18n="hero.intro">Pažljivo osmišljeni stanovi sa suvremenom arhitekturom, privatnim vanjskim prostorima i mediteranskim načinom života.</p>
   </div>
@@ -150,13 +150,13 @@
     </article>
 
     <article class="apartment sold" data-floor="2kat" data-code="S8" data-name="Stan 12" data-name-en="Apartment 12" data-area="137,12" data-net="97,46" data-rooms-hr="3 spavaće sobe" data-rooms-en="3 bedrooms" data-open-hr="Velike terase" data-open-en="Large terraces" data-parking-hr="2 parking mjesta" data-parking-en="2 parking spaces" data-variants="2" data-sold="true">
-      <div class="plan-wrap"><span class="tag" data-i18n="floor.second">2. KAT</span><img src="floorplans/S8.jpg" alt="Tlocrt stana 12, Vrota Poja" loading="lazy"></div>
-      <div class="card-copy"><span class="unit-code">S8</span><h2 data-name-target>Stan 12</h2><strong>137,12 m²</strong><em>97,46 m² <span data-i18n="net">(neto)</span></em><p><span data-card="rooms">3 spavaće sobe</span><br><span data-card="open">Velike terase</span><br><span data-card="parking">2 parking mjesta</span></p><span class="variant" data-i18n="variants">2 varijante tlocrta</span><button class="view"><span data-i18n="view">POGLEDAJ TLOCRT</span> <span>→</span></button></div>
+      <div class="plan-wrap"><span class="tag" data-i18n="floor.second">2. KAT</span><span class="sold-badge">SOLD</span><img src="floorplans/S8.jpg" alt="Tlocrt stana 12, Vrota Poja" loading="lazy"></div>
+      <div class="card-copy"><span class="unit-code">S8</span><h2 data-name-target>Stan 12 <span class="sold-inline">SOLD</span></h2><strong>137,12 m²</strong><em>97,46 m² <span data-i18n="net">(neto)</span></em><p><span data-card="rooms">3 spavaće sobe</span><br><span data-card="open">Velike terase</span><br><span data-card="parking">2 parking mjesta</span></p><span class="variant" data-i18n="variants">2 varijante tlocrta</span><button class="view"><span data-i18n="view">POGLEDAJ TLOCRT</span> <span>→</span></button></div>
     </article>
 
     <article class="apartment sold" data-floor="2kat" data-code="S9" data-name="Stan 13" data-name-en="Apartment 13" data-area="49,95" data-net="36,41" data-rooms-hr="1 spavaća soba" data-rooms-en="1 bedroom" data-open-hr="Terasa / loggia" data-open-en="Terrace / loggia" data-parking-hr="Parking" data-parking-en="Parking" data-sold="true">
-      <div class="plan-wrap"><span class="tag" data-i18n="floor.second">2. KAT</span><img src="floorplans/S9.jpg" alt="Tlocrt stana 13, Vrota Poja" loading="lazy"></div>
-      <div class="card-copy"><span class="unit-code">S9</span><h2 data-name-target>Stan 13</h2><strong>49,95 m²</strong><em>36,41 m² <span data-i18n="net">(neto)</span></em><p><span data-card="rooms">1 spavaća soba</span><br><span data-card="open">Terasa / loggia</span><br><span data-card="parking">Parking</span></p><button class="view"><span data-i18n="view">POGLEDAJ TLOCRT</span> <span>→</span></button></div>
+      <div class="plan-wrap"><span class="tag" data-i18n="floor.second">2. KAT</span><span class="sold-badge">SOLD</span><img src="floorplans/S9.jpg" alt="Tlocrt stana 13, Vrota Poja" loading="lazy"></div>
+      <div class="card-copy"><span class="unit-code">S9</span><h2 data-name-target>Stan 13 <span class="sold-inline">SOLD</span></h2><strong>49,95 m²</strong><em>36,41 m² <span data-i18n="net">(neto)</span></em><p><span data-card="rooms">1 spavaća soba</span><br><span data-card="open">Terasa / loggia</span><br><span data-card="parking">Parking</span></p><button class="view"><span data-i18n="view">POGLEDAJ TLOCRT</span> <span>→</span></button></div>
     </article>
 
     <div class="image-break bathroom"><img src="images/04.webp" alt="Kupaonica u stanu Vrota Poja" loading="lazy"><div class="image-caption" data-i18n="break.bathroom">Suvremena<br>udobnost.</div></div>
@@ -194,7 +194,7 @@
     <button class="close" aria-label="Close">×</button>
     <div class="modal-visuals">
       <div class="modal-section-label" data-i18n="modal.floorplan">TLOCRT</div>
-      <div class="modal-image"><img id="modalPlan" src="" alt=""></div>
+      <div class="modal-image"><img id="modalPlan" src="" alt=""></div><button class="zoom-plan" id="zoomPlan" type="button"><span>⌕</span> <span data-i18n="modal.zoom">POVEĆAJ TLOCRT</span></button>
     </div>
     <div class="modal-copy">
       <p class="eyebrow" data-i18n="modal.apartment">STAN</p>
@@ -207,6 +207,22 @@
       <a class="download-pdf" href="docs/katalog-stanova-2027.pdf" target="_blank" rel="noopener"><span data-i18n="modal.download">DOWNLOAD PDF KATALOG</span> <span>↓</span></a>
     </div>
   </div>
+</div>
+<div class="plan-lightbox" id="planLightbox" aria-hidden="true">
+  <div class="plan-lightbox-head">
+    <span id="planLightboxTitle">TLOCRT</span>
+    <div class="plan-zoom-controls">
+      <button type="button" id="planZoomOut" aria-label="Smanji">−</button>
+      <span id="planZoomValue">100%</span>
+      <button type="button" id="planZoomIn" aria-label="Povećaj">+</button>
+      <button type="button" id="planZoomReset">RESET</button>
+    </div>
+    <button type="button" class="plan-lightbox-close" id="planLightboxClose" aria-label="Zatvori">×</button>
+  </div>
+  <div class="plan-lightbox-stage" id="planLightboxStage">
+    <img id="planLightboxImage" src="" alt="">
+  </div>
+  <div class="plan-lightbox-hint">KORISTI + / − ILI DVOSTRUKI KLIK ZA DETALJE</div>
 </div>
 <script src="script.js"></script>
 </body>
