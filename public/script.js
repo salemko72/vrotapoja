@@ -4,7 +4,7 @@ const translations = {
     'hero.eyebrow':'VROTA POJA / STARI GRAD','hero.title':'Stanovi','hero.slogan':'Moderno stanovanje –<br>u srcu povijesti.','hero.intro':'Pažljivo osmišljeni stanovi sa suvremenom arhitekturom, privatnim vanjskim prostorima i mediteranskim načinom života.',
     'filters.all':'SVI STANOVI','filters.ground':'PRIZEMLJE','filters.first':'1. KAT','filters.second':'2. KAT','filters.location':'LOKACIJA',
     'floor.ground':'PRIZEMLJE','floor.first':'1. KAT','floor.second':'2. KAT','net':'(neto)','view':'POGLEDAJ TLOCRT','variants':'2 varijante tlocrta','sold':'PRODANO',
-    'break.bedroom':'Mir u<br>svakom detalju.','break.bathroom':'Suvremena<br>udobnost.','location.eyebrow':'LOKACIJA','location.title':'Stari Grad,<br>Hvar','location.text':'Na ulazu u Stari Gradsko polje, nekoliko minuta hoda od rive i povijesne jezgre.',
+    'break.bedroom':'Mir u<br>svakom detalju.','break.bathroom':'Suvremena<br>udobnost.','location.eyebrow':'LOKACIJA','location.title':'Stari Grad,<br>Hvar','location.text':'Na ulazu u starogradsko polje, nekoliko minuta hoda od rive i povijesne jezgre.',
     'contact.eyebrow':'KONTAKT','contact.title':'Kontaktirajte nas','contact.text':'Rado ćemo odgovoriti na vaša pitanja i pomoći vam pronaći savršen stan.','contact.phone':'TELEFON','contact.email':'E-MAIL',
     'closing.text':'Mjesto gdje<br>povijest i more<br>žive zajedno.','footer.rights':'Sva prava pridržana.','modal.floorplan':'TLOCRT','modal.apartment':'STAN','modal.download':'DOWNLOAD PDF KATALOG','modal.variant':'VARIJANTA','modal.zoom':'POVEĆAJ TLOCRT',
     'sold.apartment12':'Stan 12','sold.apartment13':'Stan 13'
@@ -27,6 +27,7 @@ const variantPlans = {
   S7:['floorplans/S7.jpg','floorplans/S7-variant2.jpg'],
   S8:['floorplans/S8.jpg','floorplans/S8-variant2.jpg']
 };
+const pdfPages = {S1:2,S2:7,S3:8,S4:9,S5:10,S6:11,S7:12,S8:13,S9:14};
 
 let currentLang = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : (localStorage.getItem('vp-lang') || 'hr');
 const filters = document.querySelectorAll('.filter');
@@ -41,31 +42,6 @@ const modalFacts = document.getElementById('modalFacts');
 const modalVariant = document.getElementById('modalVariant');
 const modalVariants = document.getElementById('modalVariants');
 const zoomPlanBtn = document.getElementById('zoomPlan');
-const planLightbox = document.getElementById('planLightbox');
-const planLightboxImage = document.getElementById('planLightboxImage');
-const planLightboxStage = document.getElementById('planLightboxStage');
-const planLightboxTitle = document.getElementById('planLightboxTitle');
-const planZoomValue = document.getElementById('planZoomValue');
-let planZoom = 1;
-function setPlanZoom(value){
-  planZoom=Math.max(1,Math.min(4,value));
-  planLightboxImage.style.transform=`scale(${planZoom})`;
-  planZoomValue.textContent=`${Math.round(planZoom*100)}%`;
-}
-function openPlanLightbox(){
-  planLightboxImage.src=modalPlan.src;
-  planLightboxImage.alt=modalPlan.alt;
-  planLightboxTitle.textContent=modalName.textContent;
-  setPlanZoom(1);
-  planLightbox.classList.add('open');
-  planLightbox.setAttribute('aria-hidden','false');
-}
-function closePlanLightbox(){
-  planLightbox.classList.remove('open');
-  planLightbox.setAttribute('aria-hidden','true');
-}
-
-
 function t(key){ return translations[currentLang][key] || key; }
 function applyTranslations(){
   document.documentElement.lang=currentLang;
@@ -79,9 +55,9 @@ function applyTranslations(){
     card.querySelector('[data-card="parking"]').textContent=card.dataset[`parking${currentLang==='hr'?'Hr':'En'}`];
   });
   document.querySelector('.close').setAttribute('aria-label',currentLang==='hr'?'Zatvori':'Close');
-  document.title=currentLang==='hr'?'Vrota Poja | Stanovi u Starom Gradu na Hvaru':'FIELD GATE | Apartments in Stari Grad, Hvar';
+  document.title=currentLang==='hr'?'Vrota Poja | Novi stanovi i novogradnja u Starom Gradu, Hvar':'FIELD GATE | New apartments in Stari Grad, Hvar';
   const meta=document.querySelector('meta[name="description"]');
-  meta.content=currentLang==='hr'?'Vrota Poja — moderno stanovanje u srcu povijesti. Novi stanovi u Starom Gradu na Hvaru, s terasama, vrtovima i parkingom.':'FIELD GATE — modern living in the heart of history. Apartments in Stari Grad, Hvar, with terraces, gardens and parking.';
+  meta.content=currentLang==='hr'?'Vrota Poja — novi stanovi u Starom Gradu na Hvaru. Moderna novogradnja u srcu povijesti, s terasama, vrtovima i parkingom. Pogledajte dostupne stanove.':'FIELD GATE — new apartments in Stari Grad, Hvar. Contemporary new-build homes in the heart of history, with terraces, gardens and parking.';
   document.querySelector('meta[property="og:title"]').content=document.title;
   document.querySelector('meta[property="og:site_name"]').content=currentLang==='hr'?'Vrota Poja':'FIELD GATE';
   document.querySelector('.brand').setAttribute('aria-label',currentLang==='hr'?'Vrota Poja':'Field Gate');
@@ -105,6 +81,9 @@ function openCard(card){
   modalNet.textContent=`${card.dataset.net} m² ${t('net')}`;
   modalPlan.src=`fullplans/${card.dataset.code}.jpg`;
   modalPlan.alt=`${t('modal.floorplan')} ${card.dataset.name}`;
+  const pdfPage=pdfPages[card.dataset.code];
+  if(pdfPage) zoomPlanBtn.href=`docs/katalog-stanova-2027.pdf#page=${pdfPage}`;
+  zoomPlanBtn.setAttribute('aria-label', currentLang==='hr'?`Otvori tlocrt za ${card.dataset.name} u novom tabu`:`Open the floor plan for ${card.dataset.nameEn} in a new tab`);
   const suffix=currentLang==='hr'?'Hr':'En';
   modalFacts.innerHTML=[card.dataset[`rooms${suffix}`],card.dataset[`open${suffix}`],card.dataset[`parking${suffix}`]].filter(Boolean).map(x=>`<div>${x}</div>`).join('');
   modalVariant.innerHTML=card.dataset.variants?`<span class="variant">${t('variants')}</span>`:'';
@@ -114,17 +93,9 @@ function openCard(card){
 }
 
 cards.forEach(card=>card.addEventListener('click',e=>openCard(card)));
-zoomPlanBtn.addEventListener('click',openPlanLightbox);
-document.getElementById('planLightboxClose').addEventListener('click',closePlanLightbox);
-document.getElementById('planZoomIn').addEventListener('click',()=>setPlanZoom(planZoom+0.5));
-document.getElementById('planZoomOut').addEventListener('click',()=>setPlanZoom(planZoom-0.5));
-document.getElementById('planZoomReset').addEventListener('click',()=>setPlanZoom(1));
-planLightbox.addEventListener('click',e=>{if(e.target===planLightbox)closePlanLightbox();});
-planLightboxImage.addEventListener('dblclick',()=>setPlanZoom(planZoom===1?2:1));
-planLightboxStage.addEventListener('wheel',e=>{if(e.ctrlKey||Math.abs(e.deltaY)>0){e.preventDefault();setPlanZoom(planZoom+(e.deltaY<0?0.25:-0.25));}},{passive:false});
 document.querySelector('.close').addEventListener('click',closeModal);
 modal.addEventListener('click',e=>{if(e.target===modal)closeModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){ if(planLightbox.classList.contains('open')) closePlanLightbox(); else closeModal(); }});
+document.addEventListener('keydown',e=>{if(e.key==='Escape') closeModal();});
 function closeModal(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.style.overflow='';}
 
 // Hero crossfade: exactly one image change every 2 seconds, continuously looping.

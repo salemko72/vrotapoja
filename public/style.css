@@ -31,27 +31,3 @@ nav{display:flex;gap:34px;font-size:10px;letter-spacing:2px}nav a{padding:14px 0
 .zoom-plan{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;border:1px solid var(--line);background:var(--paper);padding:13px 14px;margin-top:-18px;margin-bottom:4px;font-size:9px;letter-spacing:1.6px;cursor:pointer;color:var(--ink)}
 .zoom-plan span:first-child{font-size:18px;line-height:10px}
 .zoom-plan:hover{background:#e9e4db}
-.plan-lightbox{position:fixed;inset:0;background:rgba(15,14,13,.96);display:none;z-index:100;padding:18px 20px 20px}
-.plan-lightbox.open{display:grid;grid-template-rows:auto 1fr auto}
-.plan-lightbox-head{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;color:#fff;min-height:48px;font-size:10px;letter-spacing:2px}
-.plan-lightbox-head>span{opacity:.75}
-.plan-zoom-controls{display:flex;align-items:center;gap:7px}
-.plan-zoom-controls button{border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.06);color:#fff;height:34px;min-width:34px;padding:0 10px;font-size:12px;cursor:pointer}
-.plan-zoom-controls span{min-width:52px;text-align:center;font-size:10px;letter-spacing:1px}
-.plan-zoom-controls button:hover{background:rgba(255,255,255,.15)}
-.plan-lightbox-close{justify-self:end;border:0!important;background:none!important;font-size:32px!important;font-weight:300;width:40px;height:40px!important;padding:0!important}
-.plan-lightbox-stage{min-height:0;overflow:auto;display:flex;align-items:center;justify-content:center;padding:10px;cursor:zoom-in}
-.plan-lightbox-stage img{width:min(88vw,1050px);height:auto;max-height:none;display:block;transform-origin:center center;transition:transform .18s ease;box-shadow:0 10px 45px rgba(0,0,0,.3)}
-.plan-lightbox-hint{text-align:center;color:rgba(255,255,255,.48);font-size:8px;letter-spacing:1.5px;padding:10px}
-@media(max-width:650px){
-  .sold-badge{right:9px;top:9px;padding:8px 10px;font-size:10px}
-  .zoom-plan{margin-top:-10px;padding:12px;font-size:8px}
-  .plan-lightbox{padding:10px}
-  .plan-lightbox-head{grid-template-columns:1fr auto;gap:8px}
-  .plan-lightbox-head>span{display:none}
-  .plan-zoom-controls{justify-self:start}
-  .plan-lightbox-close{position:absolute;right:8px;top:4px}
-  .plan-lightbox-stage{padding:6px 0}
-  .plan-lightbox-stage img{width:94vw}
-  .plan-lightbox-hint{font-size:7px}
-}
