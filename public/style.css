@@ -31,3 +31,8 @@ nav{display:flex;gap:34px;font-size:10px;letter-spacing:2px}nav a{padding:14px 0
 .zoom-plan{display:flex;align-items:center;justify-content:center;gap:7px;width:100%;border:1px solid var(--line);background:var(--paper);padding:13px 14px;margin-top:-18px;margin-bottom:4px;font-size:9px;letter-spacing:1.6px;cursor:pointer;color:var(--ink)}
 .zoom-plan span:first-child{font-size:18px;line-height:10px}
 .zoom-plan:hover{background:#e9e4db}
+
+/* v10 contact sizing + WhatsApp */
+.contact-item strong{font-size:18px;}
+.whatsapp-icon{display:inline-flex;align-items:center;justify-content:center;font-family:inherit;}
+.whatsapp-icon svg{width:18px;height:18px;display:block;fill:currentColor;}
