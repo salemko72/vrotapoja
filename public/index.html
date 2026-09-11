@@ -61,7 +61,7 @@
 <header class="site-header">
   <a class="brand" href="#top" aria-label="Vrota Poja">
     <img class="brand-mark" src="images/vp-mark.webp" alt="VP">
-    <span class="brand-name">VROTA POJA<small>STARI GRAD, HVAR</small></span>
+    <span class="brand-name" data-i18n="brand.name">VROTA POJA</span><span class="brand-sub">STARI GRAD, HVAR</span>
   </a>
   <nav aria-label="Glavna navigacija">
     <a href="#projekt" data-i18n="nav.project">O PROJEKTU</a>
@@ -70,7 +70,6 @@
     <a href="#kontakt" data-i18n="nav.contact">KONTAKT</a>
   </nav>
   <div class="header-actions">
-    <a class="header-cta" href="#kontakt"><span data-i18n="nav.contactUs">KONTAKTIRAJTE NAS</span> <span>→</span></a>
     <div class="language-switch" aria-label="Language switch">
       <button type="button" class="lang active" data-lang="hr">HR</button>
       <span>/</span>
@@ -93,7 +92,9 @@
       <img class="hero-slide active" src="images/01.webp" alt="Interijer stana Vrota Poja" fetchpriority="high">
       <img class="hero-slide" src="images/exterior-day.webp" alt="Vrota Poja — dnevni eksterijer">
       <img class="hero-slide" src="images/04.webp" alt="Kupaonica u stanu Vrota Poja">
+      <img class="hero-slide" src="images/living-room-2.webp" alt="Dnevni boravak u stanu Vrota Poja">
       <img class="hero-slide" src="images/exterior-night.webp" alt="Vrota Poja — noćni eksterijer">
+      <img class="hero-slide" src="images/living-room-3.webp" alt="Dnevni boravak i kuhinja u stanu Vrota Poja">
     </div>
     <div class="hero-label">STARI GRAD<br><small>HVAR</small></div>
   </div>
@@ -149,26 +150,31 @@
     </article>
 
     <article class="apartment sold" data-floor="2kat" data-code="S8" data-name="Stan 12" data-name-en="Apartment 12" data-area="137,12" data-net="97,46" data-rooms-hr="3 spavaće sobe" data-rooms-en="3 bedrooms" data-open-hr="Velike terase" data-open-en="Large terraces" data-parking-hr="2 parking mjesta" data-parking-en="2 parking spaces" data-variants="2" data-sold="true">
-      <div class="plan-wrap"><span class="tag" data-i18n="floor.second">2. KAT</span><span class="sold-badge" data-i18n="sold">PRODANO</span><img src="floorplans/S8.jpg" alt="Tlocrt stana 12, Vrota Poja" loading="lazy"></div>
+      <div class="plan-wrap"><span class="tag" data-i18n="floor.second">2. KAT</span><img src="floorplans/S8.jpg" alt="Tlocrt stana 12, Vrota Poja" loading="lazy"></div>
       <div class="card-copy"><span class="unit-code">S8</span><h2 data-name-target>Stan 12</h2><strong>137,12 m²</strong><em>97,46 m² <span data-i18n="net">(neto)</span></em><p><span data-card="rooms">3 spavaće sobe</span><br><span data-card="open">Velike terase</span><br><span data-card="parking">2 parking mjesta</span></p><span class="variant" data-i18n="variants">2 varijante tlocrta</span><button class="view"><span data-i18n="view">POGLEDAJ TLOCRT</span> <span>→</span></button></div>
     </article>
 
     <article class="apartment sold" data-floor="2kat" data-code="S9" data-name="Stan 13" data-name-en="Apartment 13" data-area="49,95" data-net="36,41" data-rooms-hr="1 spavaća soba" data-rooms-en="1 bedroom" data-open-hr="Terasa / loggia" data-open-en="Terrace / loggia" data-parking-hr="Parking" data-parking-en="Parking" data-sold="true">
-      <div class="plan-wrap"><span class="tag" data-i18n="floor.second">2. KAT</span><span class="sold-badge" data-i18n="sold">PRODANO</span><img src="floorplans/S9.jpg" alt="Tlocrt stana 13, Vrota Poja" loading="lazy"></div>
+      <div class="plan-wrap"><span class="tag" data-i18n="floor.second">2. KAT</span><img src="floorplans/S9.jpg" alt="Tlocrt stana 13, Vrota Poja" loading="lazy"></div>
       <div class="card-copy"><span class="unit-code">S9</span><h2 data-name-target>Stan 13</h2><strong>49,95 m²</strong><em>36,41 m² <span data-i18n="net">(neto)</span></em><p><span data-card="rooms">1 spavaća soba</span><br><span data-card="open">Terasa / loggia</span><br><span data-card="parking">Parking</span></p><button class="view"><span data-i18n="view">POGLEDAJ TLOCRT</span> <span>→</span></button></div>
     </article>
 
     <div class="image-break bathroom"><img src="images/04.webp" alt="Kupaonica u stanu Vrota Poja" loading="lazy"><div class="image-caption" data-i18n="break.bathroom">Suvremena<br>udobnost.</div></div>
   </div>
+  <div class="sold-list" aria-label="Prodani stanovi">
+    <span data-i18n="sold.apartment12">Stan 12</span> <b>SOLD</b>
+    <span class="sold-separator">·</span>
+    <span data-i18n="sold.apartment13">Stan 13</span> <b>SOLD</b>
+  </div>
 </section>
 
-<section class="location" id="lokacija">
+<section class="location" id="lokacija" aria-label="Lokacija">
   <div><p class="eyebrow" data-i18n="location.eyebrow">LOKACIJA</p><h2 data-i18n="location.title">Stari Grad,<br>Hvar</h2></div>
   <p data-i18n="location.text">Na ulazu u Stari Gradsko polje, nekoliko minuta hoda od rive i povijesne jezgre.</p>
 </section>
 
 <section class="contact" id="kontakt">
-  <div class="contact-brand"><img class="brand-mark" src="images/vp-mark.webp" alt="VP"><div>VROTA POJA<small>STARI GRAD, HVAR</small></div></div>
+  <div class="contact-brand"><img class="brand-mark" src="images/vp-mark.webp" alt="VP"><div><span data-i18n="brand.name">VROTA POJA</span><small>STARI GRAD, HVAR</small></div></div>
   <div class="contact-intro"><p class="eyebrow" data-i18n="contact.eyebrow">KONTAKT</p><h2 data-i18n="contact.title">Kontaktirajte nas</h2><p data-i18n="contact.text">Rado ćemo odgovoriti na vaša pitanja i pomoći vam pronaći savršen stan.</p></div>
   <a class="contact-item" href="tel:+38598212100"><span class="contact-icon">⌕</span><div><small data-i18n="contact.phone">TELEFON</small><strong>+385 98 212 100</strong></div></a>
   <a class="contact-item" href="mailto:jure.tomas@gmail.com"><span class="contact-icon">✉</span><div><small data-i18n="contact.email">E-MAIL</small><strong>jure.tomas@gmail.com</strong></div></a>
@@ -181,7 +187,7 @@
 </section>
 </main>
 
-<footer><div>VROTA POJA</div><div>© 2026 Vrota Poja. <span data-i18n="footer.rights">Sva prava pridržana.</span></div></footer>
+<footer><div data-i18n="brand.name">VROTA POJA</div><div>© 2026 Vrota Poja. <span data-i18n="footer.rights">Sva prava pridržana.</span></div></footer>
 
 <div class="modal" id="modal" aria-hidden="true">
   <div class="modal-inner">
@@ -189,8 +195,6 @@
     <div class="modal-visuals">
       <div class="modal-section-label" data-i18n="modal.floorplan">TLOCRT</div>
       <div class="modal-image"><img id="modalPlan" src="" alt=""></div>
-      <div class="modal-section-label" data-i18n="modal.isometric">3D IZOMETRIJSKA SHEMA</div>
-      <div class="modal-image iso"><img id="modalIso" src="" alt=""></div>
     </div>
     <div class="modal-copy">
       <p class="eyebrow" data-i18n="modal.apartment">STAN</p>

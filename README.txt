@@ -26,3 +26,5 @@ Update rules:
 - Lower building image uses its full natural aspect ratio to avoid the previous top crop.
 
 Deploy only after reviewing the live preview.
+
+Latest refinements 2026-09-11: new VP logo, FIELD GATE EN brand, 6-image hero loop, softer hero fade, no isometric previews, bottom image +10% height, sold notices for Apartments 12/13.
