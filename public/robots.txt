@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://vrotapoja.com/sitemap.xml
