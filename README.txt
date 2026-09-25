@@ -1,6 +1,10 @@
-VROTA POJA — WEBSITE UPDATE
+VROTA POJA — CURRENT WEBSITE SNAPSHOT
 
-This package is ready for deployment to Cloudflare Workers Static Assets.
+Production: https://vrotapoja.com/
+GitHub: https://github.com/salemko72/vrotapoja
+Cloudflare Worker: vrotapoja
+
+This package is based on the Vrota Poja / FIELD GATE site and includes the 2026-09-25 catalogue and price-list update.
 
 Structure:
 - wrangler.jsonc
@@ -9,22 +13,25 @@ Structure:
 - public/script.js
 - public/images/*
 - public/floorplans/*
-- public/isometric/*
-- public/docs/katalog-stanova-2027.pdf
+- public/fullplans/*
+- public/isometric/* (legacy source assets; not displayed)
+- public/docs/katalog-stanova-2026-2027-v2.pdf
 - public/robots.txt
 - public/sitemap.xml
+- SOURCE-DATA/* (source PDF and price-list XLSX)
+- MIGRATION/*
 
-Update rules:
-- The new 2027 apartment catalogue is the source of truth for apartment data and floor plans.
-- Existing site layout/tectonics are preserved.
-- Apartments are displayed as 9 units: Stan 1, Stan 6, Stan 7, Stan 8, Stan 9, Stan 10, Stan 11, Stan 12, Stan 13.
-- Stan 12 and Stan 13 are marked SOLD based on the catalogue pages.
-- Stan 7, Stan 8, Stan 11 and Stan 12 include two floor-plan variants shown in the detail modal.
-- Each apartment detail includes the classic floor plan, an isometric schematic visual, and a download link to the full catalogue PDF.
-- HR/EN language switch is implemented client-side.
-- Hero cycles every 2 seconds with crossfade: interior, daytime exterior, bathroom, night exterior.
-- Lower building image uses its full natural aspect ratio to avoid the previous top crop.
+CURRENT RULES
+- New catalogue `Katalog Stanova 2026-2027 v2.pdf` is the apartment-plan source of truth.
+- Displayed units: Stan 1 through Stan 13.
+- Ground floor: Stan 1–5; 1st floor: Stan 6–9; 2nd floor: Stan 10–13.
+- Stan 12 and Stan 13 are SOLD.
+- Stan 7, Stan 8, Stan 11 and Stan 12 have two plan variants on their catalogue pages.
+- Apartment modal uses full-page high-resolution renders from the new catalogue.
+- `POVEĆAJ TLOCRT` opens the new PDF in a new browser tab at the matching page.
+- Cjenik popup is generated from `SOURCE-DATA/PRICE LIST - Sept 2026.xlsx` and maps its s/p codes to Stan 1–13.
+- Hero cycles six images every 2 seconds with crossfade.
+- Location map is used as a background behind the location text.
+- Contact has email plus WhatsApp; the WhatsApp number appears once.
 
-Deploy only after reviewing the live preview.
-
-Latest refinements 2026-09-11: new VP logo, FIELD GATE EN brand, 6-image hero loop, softer hero fade, no isometric previews, bottom image +10% height, sold notices for Apartments 12/13.
+For continuation by another AI agent, read `MIGRATION/AI-HANDOFF.md` and `UPDATE-2026-09-25.md`.

@@ -1,0 +1,51 @@
+VROTA POJA — MIGRATION ASSET MANIFEST
+Snapshot: 2026-09-25
+
+PUBLIC ROOT
+- public/index.html
+- public/script.js
+- public/style.css
+- public/robots.txt
+- public/sitemap.xml
+
+CATALOGUE
+- public/docs/katalog-stanova-2026-2027-v2.pdf
+
+FLOORPLAN CARD PREVIEWS
+- public/floorplans/S1.jpg ... S13.jpg
+
+FULL CATALOGUE PAGE IMAGES USED BY MODAL
+- public/fullplans/S1.jpg ... S13.jpg
+
+PHOTOGRAPHY / BRAND
+- public/images/01.webp
+- public/images/03.webp
+- public/images/04.webp
+- public/images/building.webp
+- public/images/exterior-day.webp
+- public/images/exterior-night.webp
+- public/images/living-room-2.webp
+- public/images/living-room-3.webp
+- public/images/mapa.png
+- public/images/vp-mark.jpg
+- public/images/vp-mark.webp
+
+LEGACY SOURCE ASSETS (NOT CURRENTLY DISPLAYED)
+- public/isometric/S1.jpg ... S9.jpg
+
+SOURCE DATA
+- SOURCE-DATA/Katalog Stanova 2026-2027 v2.pdf
+- SOURCE-DATA/PRICE LIST - Sept 2026.xlsx
+
+CONFIG
+- wrangler.jsonc
+- .gitignore
+- README.txt
+
+MIGRATION DOCS
+- MIGRATION/AI-HANDOFF.md
+- MIGRATION/PROJECT-STATE.md
+- MIGRATION/DEPLOY.md
+- MIGRATION/ASSET-MANIFEST.txt
+- UPDATE-2026-09-25.md
+- Vrota_Poja_SEO_upute_i_code_v2.docx (if copied into package)
