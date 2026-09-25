@@ -7,7 +7,7 @@ const translations = {
     'break.bedroom':'Mir u<br>svakom detalju.','break.bathroom':'Suvremena<br>udobnost.','location.eyebrow':'LOKACIJA','location.title':'Stari Grad,<br>Hvar','location.text':'Na ulazu u starogradsko polje, nekoliko minuta hoda od rive i povijesne jezgre.',
     'pricelist.eyebrow':'CJENIK','pricelist.title':'Cjenik','pricelist.open':'OTVORI CJENIK','price.status':'STATUS','price.apartment':'STAN','price.parking':'PARKING',
     'contact.eyebrow':'KONTAKT','contact.title':'Kontaktirajte nas','contact.text':'Rado ćemo odgovoriti na vaša pitanja i pomoći vam pronaći savršen stan.','contact.email':'E-MAIL',
-    'closing.text':'Mjesto gdje<br>povijest i more<br>žive zajedno.','footer.rights':'Sva prava pridržana.','modal.floorplan':'TLOCRT','modal.apartment':'STAN','modal.download':'PREUZMI PDF KATALOG','modal.variant':'VARIJANTA','modal.zoom':'POVEĆAJ TLOCRT',
+    'footer.rights':'Sva prava pridržana.','modal.floorplan':'TLOCRT','modal.apartment':'STAN','modal.download':'PREUZMI PDF KATALOG','modal.variant':'VARIJANTA','modal.zoom':'POVEĆAJ TLOCRT',
     'sold.apartment12':'Stan 12','sold.apartment13':'Stan 13'
   },
   en: {
