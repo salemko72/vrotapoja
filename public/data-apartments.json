@@ -1,0 +1,119 @@
+[
+  {
+    "n": 1,
+    "status": "RESERVED",
+    "net": 57.35,
+    "indoor": 44.16,
+    "parking": 1,
+    "eurM2": 4000,
+    "price": 285000
+  },
+  {
+    "n": 2,
+    "status": "AVAILABLE",
+    "net": 65.12,
+    "indoor": 47.2,
+    "parking": 1,
+    "eurM2": 4000,
+    "price": 320000
+  },
+  {
+    "n": 3,
+    "status": "AVAILABLE",
+    "net": 66.3,
+    "indoor": 47.56,
+    "parking": 1,
+    "eurM2": 4500,
+    "price": 325000
+  },
+  {
+    "n": 4,
+    "status": "AVAILABLE",
+    "net": 131.04,
+    "indoor": 95.09,
+    "parking": 2,
+    "eurM2": 4500,
+    "price": 590000
+  },
+  {
+    "n": 5,
+    "status": "AVAILABLE",
+    "net": 56.53,
+    "indoor": 43.89,
+    "parking": 1,
+    "eurM2": 4900,
+    "price": 280000
+  },
+  {
+    "n": 6,
+    "status": "AVAILABLE",
+    "net": 49.2,
+    "indoor": 40.3,
+    "parking": 1,
+    "eurM2": 4900,
+    "price": 240000
+  },
+  {
+    "n": 7,
+    "status": "AVAILABLE",
+    "net": 104.36,
+    "indoor": 77.48,
+    "parking": 2,
+    "eurM2": 4500,
+    "price": 430000
+  },
+  {
+    "n": 8,
+    "status": "AVAILABLE",
+    "net": 113.53,
+    "indoor": 85.89,
+    "parking": 2,
+    "eurM2": 4500,
+    "price": 460000
+  },
+  {
+    "n": 9,
+    "status": "AVAILABLE",
+    "net": 37.29,
+    "indoor": 31.63,
+    "parking": 1,
+    "eurM2": 4900,
+    "price": 185000
+  },
+  {
+    "n": 10,
+    "status": "AVAILABLE",
+    "net": 45.9,
+    "indoor": 39.64,
+    "parking": 1,
+    "eurM2": 4900,
+    "price": 225000
+  },
+  {
+    "n": 11,
+    "status": "AVAILABLE",
+    "net": 91.91,
+    "indoor": 77.48,
+    "parking": 2,
+    "eurM2": 4000,
+    "price": 420000
+  },
+  {
+    "n": 12,
+    "status": "SOLD",
+    "net": 100.19,
+    "indoor": 85.85,
+    "parking": 2,
+    "eurM2": 4000,
+    "price": 420000
+  },
+  {
+    "n": 13,
+    "status": "SOLD",
+    "net": 35.9,
+    "indoor": 29.99,
+    "parking": 1,
+    "eurM2": 4900,
+    "price": 175000
+  }
+]

@@ -12,7 +12,7 @@ const translations = {
   },
   en: {
     'brand.name':'FIELD GATE','nav.apartments':'APARTMENTS','nav.pricelist':'PRICE LIST','nav.location':'LOCATION','nav.contact':'CONTACT',
-    'hero.eyebrow':'VROTA POJA / STARI GRAD','hero.title':'Apartments','hero.slogan':'Modern living<br>in the heart of history.','hero.intro':'Thoughtfully designed apartments with contemporary architecture, private outdoor spaces and a Mediterranean way of life.',
+    'hero.eyebrow':'VROTA POJA / STARI GRAD','hero.title':'Apartments','hero.slogan':'Modern living in<br>the heart of history.','hero.intro':'Thoughtfully designed apartments with contemporary architecture, private outdoor spaces and a Mediterranean way of life.',
     'filters.all':'ALL APARTMENTS','filters.ground':'GROUND FLOOR','filters.first':'1ST FLOOR','filters.second':'2ND FLOOR','filters.location':'LOCATION',
     'floor.ground':'GROUND FLOOR','floor.first':'1ST FLOOR','floor.second':'2ND FLOOR','net':'(net)','view':'VIEW FLOOR PLAN','variants':'2 floor plan variants','sold':'SOLD',
     'break.bedroom':'Peace in<br>every detail.','break.bathroom':'Contemporary<br>comfort.','location.eyebrow':'LOCATION','location.title':'Stari Grad,<br>Hvar','location.text':'At the entrance to Stari Gradsko polje, a short walk from the waterfront and historic centre.',
@@ -25,25 +25,36 @@ const translations = {
 
 const pdfPages = Object.fromEntries(Array.from({length:13},(_,i)=>[`S${i+1}`,i+1]));
 
-const priceRows = [
-  {n:1,status:'',net:57.35,indoor:44.16,outdoor:13.19,parking:1,parkingM2:18.50,price:285000},
-  {n:2,status:'',net:65.12,indoor:47.20,outdoor:17.92,parking:1,parkingM2:12.00,price:320000},
-  {n:3,status:'',net:66.30,indoor:47.56,outdoor:18.74,parking:1,parkingM2:12.00,price:325000},
-  {n:4,status:'',net:131.04,indoor:95.09,outdoor:35.95,parking:2,parkingM2:24.00,price:590000},
-  {n:5,status:'',net:56.53,indoor:43.89,outdoor:12.64,parking:1,parkingM2:12.00,price:280000},
-  {n:6,status:'',net:49.20,indoor:40.30,outdoor:8.80,parking:1,parkingM2:12.00,price:240000},
-  {n:7,status:'',net:104.36,indoor:77.48,outdoor:26.88,parking:2,parkingM2:24.00,price:430000},
-  {n:8,status:'',net:113.53,indoor:85.89,outdoor:27.64,parking:2,parkingM2:24.00,price:460000},
-  {n:9,status:'',net:37.29,indoor:31.63,outdoor:6.65,parking:1,parkingM2:12.00,price:185000},
-  {n:10,status:'',net:45.90,indoor:39.64,outdoor:5.90,parking:1,parkingM2:12.00,price:225000},
-  {n:11,status:'',net:91.91,indoor:77.48,outdoor:14.43,parking:2,parkingM2:24.00,price:420000},
-  {n:12,status:'SOLD',net:100.19,indoor:85.85,outdoor:14.34,parking:2,parkingM2:24.00,price:420000},
-  {n:13,status:'SOLD',net:35.90,indoor:29.99,outdoor:5.90,parking:1,parkingM2:12.00,price:175000}
+const defaultPriceRows = [
+  {n:1,status:'RESERVED',net:57.35,indoor:44.16,outdoorBrutto:94.91,parking:1,eurM2:4969.485615,price:285000},
+  {n:2,status:'AVAILABLE',net:65.12,indoor:47.20,outdoorBrutto:82.49,parking:1,eurM2:4914.004914,price:320000},
+  {n:3,status:'AVAILABLE',net:66.30,indoor:47.56,outdoorBrutto:61.16,parking:1,eurM2:4901.960784,price:325000},
+  {n:4,status:'AVAILABLE',net:131.04,indoor:95.09,outdoorBrutto:131.68,parking:2,eurM2:4502.442002,price:590000},
+  {n:5,status:'AVAILABLE',net:56.53,indoor:43.89,outdoorBrutto:102.48,parking:1,eurM2:4953.122236,price:280000},
+  {n:6,status:'AVAILABLE',net:49.20,indoor:40.30,outdoorBrutto:11.31,parking:1,eurM2:4878.048780,price:240000},
+  {n:7,status:'AVAILABLE',net:104.36,indoor:77.48,outdoorBrutto:29.45,parking:2,eurM2:4120.352626,price:430000},
+  {n:8,status:'AVAILABLE',net:113.53,indoor:85.89,outdoorBrutto:31.59,parking:2,eurM2:4051.792478,price:460000},
+  {n:9,status:'AVAILABLE',net:37.29,indoor:31.63,outdoorBrutto:9.29,parking:1,eurM2:4961.115581,price:185000},
+  {n:10,status:'AVAILABLE',net:45.90,indoor:39.64,outdoorBrutto:5.20,parking:1,eurM2:4901.960784,price:225000},
+  {n:11,status:'AVAILABLE',net:91.91,indoor:77.48,outdoorBrutto:27.56,parking:2,eurM2:4569.687738,price:420000},
+  {n:12,status:'SOLD',net:100.19,indoor:85.85,outdoorBrutto:27.29,parking:2,eurM2:4192.035133,price:420000},
+  {n:13,status:'SOLD',net:35.90,indoor:29.99,outdoorBrutto:5.64,parking:1,eurM2:4874.651811,price:175000}
 ];
+const priceRows = (()=>{ try { const x=JSON.parse(localStorage.getItem('vp-apartments')); return Array.isArray(x)&&x.length ? x : defaultPriceRows; } catch(e){ return defaultPriceRows; } })();
+
 
 let currentLang = new URLSearchParams(location.search).get('lang') === 'en' ? 'en' : (localStorage.getItem('vp-lang') || 'hr');
 const filters = document.querySelectorAll('.filter');
 const cards = document.querySelectorAll('.apartment');
+priceRows.forEach(row=>{
+  const card=document.querySelector(`.apartment[data-code="S${row.n}"]`);
+  if(!card) return;
+  const strong=card.querySelector('.card-copy strong');
+  const em=card.querySelector('.card-copy em');
+  if(strong) strong.textContent=`${formatNumber(row.net)} m²`;
+  if(em) em.innerHTML=`${formatNumber(row.indoor)} m² <span data-i18n="net">(neto)</span>`;
+});
+
 const modal = document.getElementById('modal');
 const modalPlan = document.getElementById('modalPlan');
 const modalName = document.getElementById('modalName');
@@ -56,6 +67,7 @@ const modalVariants = document.getElementById('modalVariants');
 const zoomPlanBtn = document.getElementById('zoomPlan');
 const priceModal = document.getElementById('priceModal');
 const priceOpen = document.getElementById('priceOpen');
+const navPrice = document.querySelector('nav a[href="#cjenik"]');
 const priceClose = document.getElementById('priceClose');
 const priceRowsEl = document.getElementById('priceRows');
 
@@ -63,8 +75,24 @@ function t(key){ return translations[currentLang][key] || key; }
 function formatNumber(value, decimals=2){ return value.toFixed(decimals).replace('.',','); }
 function formatPrice(value){ return new Intl.NumberFormat(currentLang==='hr'?'hr-HR':'en-GB').format(value); }
 
+function syncCardStatuses(){
+  priceRows.forEach(row=>{
+    const card=document.querySelector(`.apartment[data-code="S${row.n}"]`);
+    if(!card) return;
+    card.classList.toggle('sold',row.status==='SOLD');
+    card.classList.toggle('reserved',row.status==='RESERVED');
+    card.dataset.sold=row.status==='SOLD'?'true':'false';
+    const nameTarget=card.querySelector('[data-name-target]');
+    if(!nameTarget) return;
+    nameTarget.querySelectorAll('.sold-inline,.reserved-inline').forEach(x=>x.remove());
+    if(row.status==='SOLD'){ const b=document.createElement('span'); b.className='sold-inline'; b.textContent='SOLD'; nameTarget.appendChild(b); }
+    if(row.status==='RESERVED'){ const b=document.createElement('span'); b.className='reserved-inline'; b.textContent='RESERVED'; nameTarget.appendChild(b); }
+  });
+}
+
 function applyTranslations(){
   document.documentElement.lang=currentLang;
+  document.documentElement.classList.toggle('lang-en',currentLang==='en');
   document.querySelectorAll('[data-i18n]').forEach(el=>{ el.innerHTML=t(el.dataset.i18n); });
   document.querySelectorAll('.lang').forEach(b=>b.classList.toggle('active',b.dataset.lang===currentLang));
   cards.forEach(card=>{
@@ -91,6 +119,7 @@ function applyTranslations(){
   document.querySelector('meta[name="twitter:title"]').content=document.title;
   document.querySelector('meta[name="twitter:description"]').content=meta.content;
   renderPriceRows();
+  syncCardStatuses();
 }
 
 document.querySelectorAll('.lang').forEach(btn=>btn.addEventListener('click',()=>{ currentLang=btn.dataset.lang; localStorage.setItem('vp-lang',currentLang); applyTranslations(); }));
@@ -127,9 +156,9 @@ function renderPriceRows(){
   if(!priceRowsEl) return;
   priceRowsEl.innerHTML=priceRows.map(row=>{
     const sold=row.status==='SOLD';
-    const eur=Math.round(row.price/row.net);
     const soldText = value => sold ? `<span class="price-sold-text">${value}</span>` : value;
-    return `<tr class="${sold?'price-sold':''}">\n      <td>${sold?soldText('<span class="price-sold-label">SOLD</span>'):''}</td>\n      <td>${soldText(`<strong>Stan ${row.n}</strong>`)}</td>\n      <td>${soldText(formatNumber(row.net))}</td>\n      <td>${soldText(formatNumber(row.indoor))}</td>\n      <td>${soldText(formatNumber(row.outdoor))}</td>\n      <td>${soldText(row.parking)}</td>\n      <td>${soldText(formatNumber(row.parkingM2))}</td>\n      <td>${soldText(formatPrice(eur))}</td>\n      <td class="price-value">${soldText(formatPrice(row.price))}</td>\n    </tr>`;
+    const statusLabel = row.status==='SOLD' ? 'SOLD' : (row.status==='RESERVED' ? 'RESERVED' : 'AVAILABLE');
+    return `<tr class="${sold?'price-sold':''}">\n      <td><span class="price-status price-status-${String(row.status).toLowerCase()}">${statusLabel}</span></td>\n      <td>${soldText(`<strong>Stan ${row.n}</strong>`)}</td>\n      <td>${soldText(formatNumber(Number(row.net)||0))}</td>\n      <td>${soldText(formatNumber(Number(row.indoor)||0))}</td>\n      <td>${soldText(formatNumber(Number(row.outdoorBrutto)||0))}</td>\n      <td class="price-value">${soldText(formatPrice(Number(row.price)||0))}</td>\n    </tr>`;
   }).join('');
 }
 
@@ -141,6 +170,7 @@ function closePriceModal(){
   priceModal.classList.remove('open'); priceModal.setAttribute('aria-hidden','true'); if(!modal.classList.contains('open')) document.body.style.overflow='';
 }
 priceOpen?.addEventListener('click',openPriceModal);
+navPrice?.addEventListener('click',e=>{e.preventDefault();openPriceModal();});
 priceClose?.addEventListener('click',closePriceModal);
 priceModal?.addEventListener('click',e=>{if(e.target===priceModal)closePriceModal();});
 
