@@ -29,6 +29,7 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&amp;family=Playfair+Display:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://unpkg.com/maplibre-gl@6.11.2/dist/maplibre-gl.css" rel="stylesheet"/>
 <link href="style.css" rel="stylesheet"/>
 <script type="application/ld+json">
   {
@@ -210,8 +211,8 @@
 </div>
 </section>
 <section aria-label="Lokacija" class="location" id="lokacija">
-<div><p class="eyebrow" data-i18n="location.eyebrow">LOKACIJA</p><h2 data-i18n="location.title">Stari Grad,<br/>Hvar</h2></div>
-<p data-i18n="location.text">Na ulazu u starogradsko polje, nekoliko minuta hoda od rive i povijesne jezgre.</p>
+<div><p class="eyebrow" data-i18n="location.eyebrow">LOKACIJA</p><h2>Stari Grad,<br/><span class="location-title-line">Hvar <button class="map-open" id="mapOpen" type="button"><span data-i18n="location.openMap">OTVORI KARTU</span><span>→</span></button></span></h2></div>
+<div class="location-copy"><p data-i18n="location.text">Na ulazu u starogradsko polje, nekoliko minuta hoda od rive i povijesne jezgre.</p></div>
 </section>
 <section class="contact" id="kontakt">
 <div class="contact-brand"><img alt="VP" class="brand-mark" src="images/vp-mark.webp"/><div><span data-i18n="brand.name">VROTA POJA</span><small>STARI GRAD, HVAR</small></div></div>
@@ -245,6 +246,19 @@
 </div>
 </div>
 </div>
+<div aria-hidden="true" class="map-modal" id="mapModal">
+<div class="map-modal-inner">
+<button aria-label="Zatvori" class="close map-close" id="mapClose">×</button>
+<div class="map-modal-head">
+<p class="eyebrow" data-i18n="location.eyebrow">LOKACIJA</p>
+<h2 data-i18n="location.title">Stari Grad,<br/>Hvar</h2>
+</div>
+<div class="map-frame" id="locationMap">
+<div class="maptoolkit-logo" aria-label="Maptoolkit"><img src="https://www.maptoolkit.org/assets/maptoolkit-attribution.png" alt="Maptoolkit" /></div>
+</div>
+<div class="map-modal-footer"><a id="googleMapsLink" href="https://www.google.com/maps/search/?api=1&amp;query=43.185784,16.604333" target="_blank" rel="noopener" data-i18n="map.openGoogle">OPEN IN GOOGLE MAPS</a></div>
+</div>
+</div>
 <div aria-hidden="true" class="price-modal" id="priceModal">
 <div class="price-modal-inner">
 <button aria-label="Zatvori" class="close price-close" id="priceClose">×</button>
@@ -260,6 +274,12 @@
 </div>
 </div>
 </div>
-<script src="script.js"></script>
+<script type="module">
+  import * as maplibregl from "https://unpkg.com/maplibre-gl@6.11.2/dist/maplibre-gl.mjs";
+  window.maplibregl = maplibregl;
+  const s = document.createElement("script");
+  s.src = "script.js?v=33";
+  document.body.appendChild(s);
+</script>
 </body>
 </html>

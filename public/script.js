@@ -4,7 +4,7 @@ const translations = {
     'hero.eyebrow':'VROTA POJA / STARI GRAD','hero.title':'Stanovi','hero.slogan':'Moderno stanovanje<br>u srcu povijesti.','hero.intro':'Pažljivo osmišljeni stanovi sa suvremenom arhitekturom, privatnim vanjskim prostorima i mediteranskim načinom života.',
     'filters.all':'SVI STANOVI','filters.ground':'PRIZEMLJE','filters.first':'1. KAT','filters.second':'2. KAT','filters.location':'LOKACIJA',
     'floor.ground':'PRIZEMLJE','floor.first':'1. KAT','floor.second':'2. KAT','net':'(neto)','view':'POGLEDAJ TLOCRT','variants':'2 varijante tlocrta','sold':'PRODANO',
-    'break.bedroom':'Mir u<br>svakom detalju.','break.bathroom':'Suvremena<br>udobnost.','location.eyebrow':'LOKACIJA','location.title':'Stari Grad,<br>Hvar','location.text':'Na ulazu u starogradsko polje, nekoliko minuta hoda od rive i povijesne jezgre.',
+    'break.bedroom':'Mir u<br>svakom detalju.','break.bathroom':'Suvremena<br>udobnost.','location.eyebrow':'LOKACIJA','location.title':'Stari Grad,<br>Hvar','location.text':'Na ulazu u starogradsko polje, nekoliko minuta hoda od rive i povijesne jezgre.','location.openMap':'OTVORI KARTU','map.openGoogle':'OPEN IN GOOGLE MAPS',
     'pricelist.eyebrow':'CJENIK','pricelist.title':'Cjenik','pricelist.open':'OTVORI CJENIK','price.status':'STATUS','price.apartment':'STAN','price.parking':'PARKING',
     'contact.eyebrow':'KONTAKT','contact.title':'Kontaktirajte nas','contact.text':'Rado ćemo odgovoriti na vaša pitanja i pomoći vam pronaći savršen stan.','contact.email':'E-MAIL',
     'footer.rights':'Sva prava pridržana.','modal.floorplan':'TLOCRT','modal.apartment':'STAN','modal.download':'PREUZMI PDF KATALOG','modal.variant':'VARIJANTA','modal.zoom':'POVEĆAJ TLOCRT',
@@ -15,7 +15,7 @@ const translations = {
     'hero.eyebrow':'VROTA POJA / STARI GRAD','hero.title':'Apartments','hero.slogan':'Modern living in<br>the heart of history.','hero.intro':'Thoughtfully designed apartments with contemporary architecture, private outdoor spaces and a Mediterranean way of life.',
     'filters.all':'ALL APARTMENTS','filters.ground':'GROUND FLOOR','filters.first':'1ST FLOOR','filters.second':'2ND FLOOR','filters.location':'LOCATION',
     'floor.ground':'GROUND FLOOR','floor.first':'1ST FLOOR','floor.second':'2ND FLOOR','net':'(net)','view':'VIEW FLOOR PLAN','variants':'2 floor plan variants','sold':'SOLD',
-    'break.bedroom':'Peace in<br>every detail.','break.bathroom':'Contemporary<br>comfort.','location.eyebrow':'LOCATION','location.title':'Stari Grad,<br>Hvar','location.text':'At the entrance to Stari Gradsko polje, a short walk from the waterfront and historic centre.',
+    'break.bedroom':'Peace in<br>every detail.','break.bathroom':'Contemporary<br>comfort.','location.eyebrow':'LOCATION','location.title':'Stari Grad,<br>Hvar','location.text':'At the entrance to Stari Gradsko polje, a short walk from the waterfront and historic centre.','location.openMap':'OPEN MAP','map.openGoogle':'OPEN IN GOOGLE MAPS',
     'pricelist.eyebrow':'PRICE LIST','pricelist.title':'Price list','pricelist.open':'OPEN PRICE LIST','price.status':'STATUS','price.apartment':'APARTMENT','price.parking':'PARKING',
     'contact.eyebrow':'CONTACT','contact.title':'Get in touch','contact.text':'We will be happy to answer your questions and help you find the right apartment.','contact.email':'E-MAIL',
     'closing.text':'A place where<br>history and the sea<br>live together.','footer.rights':'All rights reserved.','modal.floorplan':'FLOOR PLAN','modal.apartment':'APARTMENT','modal.download':'DOWNLOAD PDF CATALOGUE','modal.variant':'VARIANT','modal.zoom':'ZOOM FLOOR PLAN',
@@ -70,6 +70,58 @@ const priceOpen = document.getElementById('priceOpen');
 const navPrice = document.querySelector('nav a[href="#cjenik"]');
 const priceClose = document.getElementById('priceClose');
 const priceRowsEl = document.getElementById('priceRows');
+const mapModal = document.getElementById('mapModal');
+const mapOpen = document.getElementById('mapOpen');
+const mapClose = document.getElementById('mapClose');
+const mapEl = document.getElementById('locationMap');
+let locationMap = null;
+
+// The real estate location (PIN) and the requested initial map crop are deliberately separate.
+const VROTA_POJA_COORDS = [43.185784, 16.604333];
+const MAP_VIEW_CENTER = [43.18476, 16.59450];
+
+function initLocationMap(){
+  if(locationMap || !mapEl || !window.maplibregl) return;
+
+  // OSM-based MapLibre basemap. Maptoolkit is used here because it provides
+  // a production vector-tile service without an API key for small commercial
+  // sites, and avoids the OSM standard tile-server restrictions.
+  const mapStyle = 'https://styles.maptoolkit.org/light.json';
+
+  locationMap = new window.maplibregl.Map({
+    container: mapEl,
+    style: mapStyle,
+    center: [MAP_VIEW_CENTER[1], MAP_VIEW_CENTER[0]],
+    zoom: 14,
+    attributionControl: true,
+    dragRotate: false,
+    touchPitch: false
+  });
+
+  locationMap.addControl(new window.maplibregl.NavigationControl({showCompass:false}), 'top-left');
+  locationMap.on('error', (event)=>console.warn('Vrota Poja map error:', event?.error || event));
+
+  const markerEl = document.createElement('div');
+  markerEl.className = 'vrota-map-marker-wrap';
+  markerEl.innerHTML = '<div class="vrota-map-marker"><span></span></div>';
+  new window.maplibregl.Marker({element: markerEl, anchor:'center'})
+    .setLngLat([VROTA_POJA_COORDS[1], VROTA_POJA_COORDS[0]])
+    .addTo(locationMap);
+}
+
+function openMapModal(){
+  mapModal.classList.add('open');
+  mapModal.setAttribute('aria-hidden','false');
+  document.body.style.overflow='hidden';
+  initLocationMap();
+  requestAnimationFrame(()=>{ if(locationMap){ locationMap.resize(); locationMap.jumpTo({center:[MAP_VIEW_CENTER[1], MAP_VIEW_CENTER[0]],zoom:14}); } });
+}
+function closeMapModal(){
+  mapModal.classList.remove('open');
+  mapModal.setAttribute('aria-hidden','true');
+  if(!modal.classList.contains('open') && !priceModal.classList.contains('open')) document.body.style.overflow='';
+}
+
 
 function t(key){ return translations[currentLang][key] || key; }
 function formatNumber(value, decimals=2){ return value.toFixed(decimals).replace('.',','); }
@@ -169,6 +221,10 @@ function openPriceModal(){
 function closePriceModal(){
   priceModal.classList.remove('open'); priceModal.setAttribute('aria-hidden','true'); if(!modal.classList.contains('open')) document.body.style.overflow='';
 }
+mapOpen?.addEventListener('click',openMapModal);
+mapClose?.addEventListener('click',closeMapModal);
+mapModal?.addEventListener('click',e=>{if(e.target===mapModal)closeMapModal();});
+
 priceOpen?.addEventListener('click',openPriceModal);
 navPrice?.addEventListener('click',e=>{e.preventDefault();openPriceModal();});
 priceClose?.addEventListener('click',closePriceModal);
@@ -176,6 +232,7 @@ priceModal?.addEventListener('click',e=>{if(e.target===priceModal)closePriceModa
 
 document.addEventListener('keydown',e=>{
   if(e.key!=='Escape') return;
+  if(mapModal.classList.contains('open')) { closeMapModal(); return; }
   if(priceModal.classList.contains('open')) { closePriceModal(); return; }
   if(modal.classList.contains('open')) closeModal();
 });
