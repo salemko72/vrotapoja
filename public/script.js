@@ -83,12 +83,13 @@ const MAP_VIEW_CENTER = [43.18476, 16.59450];
 // tall portrait map while the desktop crop remains unchanged.
 const MAP_VIEW_MOBILE_CENTER = [43.183925, 16.591857];
 const MAP_VIEW_ZOOM = 14;
+const MAP_VIEW_MOBILE_ZOOM = 13;
 
 function getMapView(){
   const mobile = window.matchMedia('(max-width: 650px)').matches;
   return {
     center: mobile ? MAP_VIEW_MOBILE_CENTER : MAP_VIEW_CENTER,
-    zoom: MAP_VIEW_ZOOM
+    zoom: mobile ? MAP_VIEW_MOBILE_ZOOM : MAP_VIEW_ZOOM
   };
 }
 
