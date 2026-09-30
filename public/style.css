@@ -120,7 +120,7 @@ nav{display:flex;gap:34px;font-size:10px;letter-spacing:2px}nav a{padding:14px 0
 /* Interactive location map */
 .location-copy{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;align-self:center;max-width:430px}
 .location-copy>p{max-width:430px;font-family:var(--serif);font-size:25px;line-height:1.3;margin:0;color:rgba(255,255,255,.96)}
-.map-open{margin:0;border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.08);color:#fff;padding:10px 14px;font-size:8px;letter-spacing:1.8px;cursor:pointer;display:inline-flex;gap:18px;align-items:center;vertical-align:middle;transition:background .2s ease,border-color .2s ease;transform:translateY(36%)}
+.map-open{margin:0;border:1px solid rgba(255,255,255,.75);background:rgba(255,255,255,.08);color:#fff;padding:10px 14px;font-size:8px;letter-spacing:1.8px;cursor:pointer;display:inline-flex;gap:18px;align-items:center;vertical-align:middle;transition:background .2s ease,border-color .2s ease;transform:translateY(20%)}
 .map-open span:last-child{font-size:16px;line-height:1}.map-open:hover{background:rgba(255,255,255,.18);border-color:#fff}
 .map-modal{position:fixed;inset:0;background:rgba(18,18,17,.68);display:none;place-items:center;padding:24px;z-index:70}.map-modal.open{display:grid}
 .map-modal-inner{background:var(--paper);width:min(1240px,100%);height:min(90vh,820px);position:relative;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 80px rgba(0,0,0,.25)}

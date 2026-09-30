@@ -79,6 +79,18 @@ let locationMap = null;
 // The real estate location (PIN) and the requested initial map crop are deliberately separate.
 const VROTA_POJA_COORDS = [43.185784, 16.604333];
 const MAP_VIEW_CENTER = [43.18476, 16.59450];
+// Mobile has its own viewport so the real-estate PIN stays visible in the
+// tall portrait map while the desktop crop remains unchanged.
+const MAP_VIEW_MOBILE_CENTER = [43.183925, 16.591857];
+const MAP_VIEW_ZOOM = 14;
+
+function getMapView(){
+  const mobile = window.matchMedia('(max-width: 650px)').matches;
+  return {
+    center: mobile ? MAP_VIEW_MOBILE_CENTER : MAP_VIEW_CENTER,
+    zoom: MAP_VIEW_ZOOM
+  };
+}
 
 function initLocationMap(){
   if(locationMap || !mapEl || !window.maplibregl) return;
@@ -91,8 +103,8 @@ function initLocationMap(){
   locationMap = new window.maplibregl.Map({
     container: mapEl,
     style: mapStyle,
-    center: [MAP_VIEW_CENTER[1], MAP_VIEW_CENTER[0]],
-    zoom: 14,
+    center: [getMapView().center[1], getMapView().center[0]],
+    zoom: getMapView().zoom,
     attributionControl: true,
     dragRotate: false,
     touchPitch: false
@@ -114,7 +126,7 @@ function openMapModal(){
   mapModal.setAttribute('aria-hidden','false');
   document.body.style.overflow='hidden';
   initLocationMap();
-  requestAnimationFrame(()=>{ if(locationMap){ locationMap.resize(); locationMap.jumpTo({center:[MAP_VIEW_CENTER[1], MAP_VIEW_CENTER[0]],zoom:14}); } });
+  requestAnimationFrame(()=>{ if(locationMap){ const view=getMapView(); locationMap.resize(); locationMap.jumpTo({center:[view.center[1], view.center[0]],zoom:view.zoom}); } });
 }
 function closeMapModal(){
   mapModal.classList.remove('open');
